@@ -1,0 +1,85 @@
+//: Playground - noun: a place where people can play
+
+import UIKit
+
+public class Heading {
+    public var weight: Int
+    public var text: String
+    init(weight: Int, text: String) {
+        self.weight = weight
+        self.text = text
+    }
+    
+}
+
+public class Node {
+    public var heading: Heading
+    public var children = [Node]()
+    weak var parent: Node?
+    
+    init(heading: Heading) {
+        self.heading = heading
+    }
+    
+    func addChild(child: Node) {
+        children.append(child)
+        child.parent = self
+    }
+    
+    
+    func insertHeadingWithWeight(heading: Heading) -> Node? {
+        if heading.weight == self.heading.weight+1 {
+            let node = Node(heading: heading)
+            self.children.append(node)
+            return self
+        }
+        if let last = children.last {
+            if let found = last.insertHeadingWithWeight(heading: heading) {
+                return found
+            }
+        }
+        return nil
+    }
+    
+}
+
+//Used to help debug
+extension Node : CustomStringConvertible {
+    
+    public var description: String {
+        var text = "\(self.heading.text)"
+        
+        if !children.isEmpty {
+            text += " {" + children.map { $0.description }.joined(separator: ", ") + "} "
+        }
+        return text
+    }
+    
+}
+
+func outline(headings: [Heading]) -> Node {
+    let root = Node(heading: Heading(weight: 0, text: ""))
+    for heading in headings {
+        root.insertHeadingWithWeight(heading: heading)
+    }
+    return root
+}
+
+
+
+
+
+var headings = [Heading]()
+
+headings.append(Heading(weight: 1, text: "All About Birds"))
+headings.append(Heading(weight: 2, text: "Kinds of Birds"))
+headings.append(Heading(weight: 3, text: "The Finch"))
+headings.append(Heading(weight: 3, text: "The Swan"))
+headings.append(Heading(weight: 2, text: "Habitats"))
+headings.append(Heading(weight: 3, text: "Wetlands"))
+
+let root = outline(headings: headings)
+print(root)
+
+
+
