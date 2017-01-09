@@ -48,5 +48,5 @@ func powerSet(set: [Int]) -> [[Int]] {
     return allSets
 }
 
-var arr = [1, 2, 3]
-powerSet(set: arr)
+var arr = [1, 2, 3, 4]
+powerSet(set: arr, index: arr.count-1)
