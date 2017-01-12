@@ -29,9 +29,17 @@ func binarySearch(arr: [Int], val: Int, _ low: Int, _ high: Int) -> Int {
 }
 
 func rotatedSearch(arr: [Int], val: Int) -> Int {
+    
     var leftIndex = 0
     var rightIndex = arr.count-1
     var pivot = 0
+    
+    if arr[leftIndex] == arr[rightIndex] {
+        while leftIndex < rightIndex && arr[leftIndex] == arr[leftIndex+1]{
+            leftIndex += 1
+        }
+        leftIndex += 1
+    }
     
     while arr[leftIndex] > arr[rightIndex] {
         
@@ -54,8 +62,9 @@ func rotatedSearch(arr: [Int], val: Int) -> Int {
     }
 }
 
-let arr = [14, 15, 17, 19, 23, 26, 29, 31, 5, 7, 10, 12]
-rotatedSearch(arr: arr, val: 7)
+
+let arr = [4, 5, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4]
+rotatedSearch(arr: arr, val: 3)
 
 
 
