@@ -32,7 +32,7 @@ func rotatedSearch(arr: [Int], val: Int) -> Int {
     
     var leftIndex = 0
     var rightIndex = arr.count-1
-    var pivot = 0
+    var pivot = (leftIndex+rightIndex)/2
     
     //Edge Case: both the left and right are the same value, iterate until leftIndex value is different
     if arr[leftIndex] == arr[rightIndex] {
@@ -41,8 +41,6 @@ func rotatedSearch(arr: [Int], val: Int) -> Int {
             leftIndex += 1
         }
     }
-    
-    print(arr[leftIndex])
     
     //Use binary search to find the pivot point of the rotated array.
     //With this knowledge, we know which half of the array the searching value is in.
@@ -64,13 +62,14 @@ func rotatedSearch(arr: [Int], val: Int) -> Int {
         return binarySearch(arr: arr, val: val, 0, pivot)
     }
     else {
+        print("left: \(pivot+1)")
         return binarySearch(arr: arr, val: val, pivot+1, arr.count-1)
     }
 }
 
 
-let arr = [3, 3, 3, 4]
-rotatedSearch(arr: arr, val: 4)
+let arr = [1, 2, 3, 4 ,5, 0, 1]
+rotatedSearch(arr: arr, val: 2)
 
 
 
