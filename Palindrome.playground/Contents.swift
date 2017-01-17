@@ -25,8 +25,25 @@ func checkPalindrome(word: String) -> Bool {
     return forwards == backwards
 }
 
+func pali(word: String) -> Bool{
+    let arrString = Array(word.characters)
+    var leftIndex = 0
+    var rightIndex = word.characters.count-1
+    
+    for _ in arrString {
+        if arrString[leftIndex] != arrString[rightIndex] {
+            return false
+        }
+        leftIndex += 1
+        rightIndex -= 1
+    }
+    return true
+}
+
 
 var word = "No lemon, no melon"
 word = word.replacingOccurrences(of: " ", with: "").lowercased()
 checkPalindrome(word: word)
+
+pali(word: word)
 
