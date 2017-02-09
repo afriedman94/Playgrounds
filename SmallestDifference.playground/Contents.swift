@@ -3,9 +3,6 @@
 import UIKit
 
 
-var array1 = [1, 3, 5, 15, 22, 31]
-var array2 = [18, 20]
-
 func smallestDif(_ first: [Int], _ second: [Int]) -> (Int, Int)? {
     let firstSorted = first.sorted()
     let secondSorted = second.sorted()
@@ -53,11 +50,47 @@ func smallestDif(_ first: [Int], _ second: [Int]) -> (Int, Int)? {
         else {
             res = (val, secondSorted[minIndex])
         }
-        print(newMin)
-        
     }
     
     return res ?? nil
 }
 
+func closestPair(_ array1: [Int], _ array2: [Int]) -> (Int, Int)? {
+    let sorted1 = array1.sorted()
+    let sorted2 = array2.sorted()
+    
+    var index1 = 0
+    var index2 = 0
+    
+    var minDifference: Int?
+    var pair: (Int, Int)?
+    
+    while index1 < sorted1.count && index2 < sorted2.count {
+        let element1 = sorted1[index1]
+        let element2 = sorted2[index2]
+        
+        let difference = abs(element1 - element2)
+        
+        if minDifference.map({ difference < $0 }) ?? true {
+            minDifference = difference
+            pair = (element1, element2)
+        }
+        
+        if element1 == element2 {
+            return pair
+        }
+        else if element1 < element2 {
+            index1 += 1
+        } else {
+            index2 += 1
+        }
+    }
+    
+    return pair
+}
+
+var array1 = [0, 1, 3]
+var array2 = [0, 0, 0, 0, 1]
+
 smallestDif(array1, array2)
+closestPair(array1, array2)
