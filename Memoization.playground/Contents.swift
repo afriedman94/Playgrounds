@@ -19,7 +19,7 @@ print(f(n: 8))
 //Memoization
 func allFib(n: Int) {
     var memo = Array<Int>(repeatElement(0, count: n+1))
-    for i in 0..<n {
+    for i in 0..<n+1 {
         print("\(i): \(fib(i, &memo))")
     }
 }
@@ -44,5 +44,5 @@ func fib(_ n: Int, _ memo: inout [Int]) -> Int {
     
 }
 
-allFib(n: 8)
+allFib(n: 55)
 
